@@ -34,11 +34,13 @@ public class CameraBehaviour : MonoBehaviour
             ball = PlayerStats.stats.GetPlayer().transform;
             ballRB= ball.GetComponent<Rigidbody2D>();
         }
-        
-        Vector3  destination = new Vector3(ball.position.x,Mathf.Max(4,ball.position.y),0)+offset;
+        //相机最低位置是4，相机默认和小球偏移offset
+        Vector3 destination = new Vector3(ball.position.x,Mathf.Max(4,ball.position.y),0)+offset;
         //camera damping
-        float distance = Mathf.Min(Vector2.Distance(destination,transform.position),maxDistance);
-        float x = distance/maxDistance;
+        //float distance = Mathf.Min(Vector2.Distance(destination,transform.position),maxDistance);
+        //float x = distance/maxDistance;
+
+        //球的速度越快，相机跟随越快
         float speed = Mathf.Sqrt(ballSpeed)*this.speed+1;//Mathf.Pow(x,7)*60;
         transform.position = Vector3.Lerp(transform.position, destination, speed* Time.deltaTime);
 

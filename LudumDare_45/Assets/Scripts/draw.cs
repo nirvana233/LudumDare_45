@@ -41,11 +41,13 @@ public class draw : MonoBehaviour
 
 
     private void StartLine(){
+        //红墨水
         if(stats.GetRedInk()>0){
             GameObject line = GameObject.Instantiate(speedLinePrefab,Vector3.zero,Quaternion.identity);
             currentLineR = line.GetComponent<LineRenderer>();
             currentLineCol = line.GetComponent<EdgeCollider2D>();
         }
+        //正常的墨水
         else{
             GameObject line = GameObject.Instantiate(linePrefab,Vector3.zero,Quaternion.identity);
             currentLineR = line.GetComponent<LineRenderer>();
@@ -55,15 +57,19 @@ public class draw : MonoBehaviour
     }
 
     private void DrawLine(){
+        //z是-10，相机的z，2d项目没用
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentLineR.positionCount++;
+            //增加线渲染器的点
             currentLineR.SetPosition(currentLineR.positionCount-1,mousePos);
             Vector2[] points= new Vector2[currentLineR.positionCount];
+            //得到线渲染器的Vector2的点给碰撞器用
             for(int i= 0; i<currentLineR.positionCount;i++){
                 points[i]=(Vector2)currentLineR.GetPosition(i);
             }
             currentLineCol.points = points;
             if(currentLineR.positionCount>1){
+                //计算墨水消耗
                 float distance = Vector2.Distance(currentLineR.GetPosition(currentLineR.positionCount-1),currentLineR.GetPosition(currentLineR.positionCount-2));
                 stats.AddInk(-distance);
                 if(stats.GetRedInk() > 0){

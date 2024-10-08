@@ -20,10 +20,10 @@ public class PlayerStats : MonoBehaviour
     }
     void Start(){
         if(PlayerPrefs.HasKey("highScore")){
-            maxInk = PlayerPrefs.GetFloat("highScore")+0.1f;
+            maxInk = PlayerPrefs.GetFloat("highScore")+100f;
         }
         else{
-            maxInk = 0.1f;
+            maxInk = 100f;
         }
         ink = maxInk;
 
