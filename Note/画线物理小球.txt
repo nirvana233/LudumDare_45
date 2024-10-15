@@ -1,5 +1,0 @@
-Ludum Dare 45
-
-画线物理小球
-
-https://github.com/nirvana233/LudumDare_45
